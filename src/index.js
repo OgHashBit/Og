@@ -90,6 +90,7 @@ function Diamonds() {
       <meshBasicMaterial />
     </instancedMesh>
   )
+}
     <>
       <Block factor={1} offset={0}>
         <Block factor={1.2}>
@@ -103,7 +104,7 @@ function Diamonds() {
           </Html>
         </Block>
       </Block>
-}
+
 
 
 function App() {
