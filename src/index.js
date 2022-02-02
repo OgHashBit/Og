@@ -90,17 +90,43 @@ function Diamonds() {
       <meshBasicMaterial />
     </instancedMesh>
   )
+    <>
+      <Block factor={1} offset={0}>
+        <Block factor={1.2}>
+          <Text left size={w * 0.15} position={[-w / 3.2, 0.5, -1]} color="#d40749">
+            DiamondBIT
+          </Text>
+        </Block>
+        <Block factor={1.0}>
+          <Html className="bottom-left" style={{ color: "white" }} position={[-canvasWidth / 2, -canvasHeight / 2, 0]}>
+            Diamond Evolution is here!{mobile ? <br /> : " "}BUY NOW ON RARIBLE!
+          </Html>
+        </Block>
+      </Block>
 }
 
+
 function App() {
+  const scrollArea = useRef()
+  const onScroll = (e) => (state.top.current = e.target.scrollTop)
+  useEffect(() => void onScroll({ target: scrollArea.current }), [])
   return (
-    <Canvas linear flat camera={{ fov: 50, position: [0, 0, 30] }}>
-      <Suspense fallback={null}>
-        <Background />
-        <Diamonds />
-      </Suspense>
-    </Canvas>
+    <>
+      <Canvas linear dpr={[1, 2]} orthographic camera={{ zoom: state.zoom, position: [0, 0, 500] }}>
+        <Suspense fallback={<Html center className="loading" children="Loading..." />}>
+          <Content />
+          <Diamonds />
+          <Startup />
+        </Suspense>
+      </Canvas>
+      <div className="scrollArea" ref={scrollArea} onScroll={onScroll}>
+        {new Array(state.sections).fill().map((_, index) => (
+          <div key={index} id={"0" + index} style={{ height: `${(state.pages / state.sections) * 100}vh` }} />
+        ))}
+      </div>
+    </>
   )
 }
+
 
 ReactDOM.render(<App />, document.getElementById("root"))
