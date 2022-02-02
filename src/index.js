@@ -108,24 +108,13 @@ function Diamonds() {
 
 
 function App() {
-  const scrollArea = useRef()
-  const onScroll = (e) => (state.top.current = e.target.scrollTop)
-  useEffect(() => void onScroll({ target: scrollArea.current }), [])
   return (
-    <>
-      <Canvas linear dpr={[1, 2]} orthographic camera={{ zoom: state.zoom, position: [0, 0, 500] }}>
-        <Suspense fallback={<Html center className="loading" children="Loading..." />}>
-          <Content />
-          <Diamonds />
-          <Startup />
-        </Suspense>
-      </Canvas>
-      <div className="scrollArea" ref={scrollArea} onScroll={onScroll}>
-        {new Array(state.sections).fill().map((_, index) => (
-          <div key={index} id={"0" + index} style={{ height: `${(state.pages / state.sections) * 100}vh` }} />
-        ))}
-      </div>
-    </>
+    <Canvas linear flat camera={{ fov: 50, position: [0, 0, 30] }}>
+      <Suspense fallback={null}>
+        <Background />
+        <Diamonds />
+      </Suspense>
+    </Canvas>
   )
 }
 
