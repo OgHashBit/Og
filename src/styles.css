@@ -29,3 +29,11 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   color: black;
 }
+#info {
+	position: absolute;
+	top: 10px;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
+	display:block;
+}
